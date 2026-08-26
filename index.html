@@ -1,66 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XROOTING PROJECT</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #020812;
+  color: #d9f3ff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Fond numérique */
+.matrix {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  opacity: 0.18;
+}
+
+.matrix span {
+  position: absolute;
+  top: -100px;
+  color: #00aaff;
+  font-size: 13px;
+  writing-mode: vertical-rl;
+  animation: fall linear infinite;
+}
+
+.matrix span:nth-child(1) { left: 5%; animation-duration: 8s; }
+.matrix span:nth-child(2) { left: 15%; animation-duration: 11s; }
+.matrix span:nth-child(3) { left: 27%; animation-duration: 7s; }
+.matrix span:nth-child(4) { left: 39%; animation-duration: 10s; }
+.matrix span:nth-child(5) { left: 51%; animation-duration: 8s; }
+.matrix span:nth-child(6) { left: 64%; animation-duration: 12s; }
+.matrix span:nth-child(7) { left: 76%; animation-duration: 9s; }
+.matrix span:nth-child(8) { left: 89%; animation-duration: 7s; }
+
+@keyframes fall {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(110vh); }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0,120,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,120,255,.06) 1px, transparent 1px);
+  background-size: 35px 35px;
+}
+
+/* Header */
+header {
+  padding: 28px 15px;
+  text-align: center;
+  border-bottom: 1px solid #0077ff;
+  background: rgba(0, 15, 35, .85);
+}
+
+.logo {
+  color: #00aaff;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px #008cff;
+}
+
+.subtitle {
+  color: #5fa9d6;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* Contenu */
+main {
+  width: 92%;
+  max-width: 720px;
+  margin: 30px auto;
+}
+
+.status {
+  background: rgba(0, 25, 55, .75);
+  border: 1px solid #005cff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #5cc8ff;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #00b7ff;
+  border-radius: 50%;
+  margin-right: 7px;
+  box-shadow: 0 0 10px #00b7ff;
+}
+
+h1 {
+  color: #00aaff;
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #789ab3;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+/* Cartes */
+.tools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tool {
+  background: rgba(5, 18, 35, .92);
+  border: 1px solid #064b91;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.tool:hover {
+  border-color: #00aaff;
+  box-shadow: 0 0 15px rgba(0,150,255,.2);
+}
+
+.tool.active {
+  border-color: #00aaff;
+  background: rgba(0, 45, 85, .8);
+}
+
+.tool-title {
+  color: #00aaff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tool-text {
+  color: #68869c;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+/* Recherche */
+.search-box {
+  background: rgba(4, 15, 29, .95);
+  border: 1px solid #0756a3;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(0, 100, 255, .08);
+}
+
+label {
+  display: block;
+  color: #00aaff;
+  font-size: 12px;
+  margin: 14px 0 7px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 7px;
+  border: 1px solid #164a78;
+  background: #01070d;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0,170,255,.2);
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #00aaff;
+  border-radius: 7px;
+  background: #003b70;
+  color: #8edcff;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00539b;
+}
+
+/* Résultats */
+#result {
+  display: none;
+  margin-top: 20px;
+  background: rgba(4, 15, 29, .97);
+  border: 1px solid #008cff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.result-title {
+  color: #00aaff;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
+
+.line {
+  padding: 12px 0;
+  border-bottom: 1px solid #12324f;
+}
+
+.label {
+  color: #58768c;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.value {
+  margin-top: 5px;
+  color: #d9f3ff;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 4px 8px;
+  border: 1px solid #006cff;
+  border-radius: 4px;
+  color: #62c8ff;
+  font-size: 10px;
+}
+
+.notice {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 7px;
+  background: #03182b;
+  color: #7192a8;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Terminal */
+.terminal {
+  margin-top: 20px;
+  background: #01060b;
+  border: 1px solid #063c70;
+  border-radius: 10px;
+  padding: 15px;
+  font-family: monospace;
+  font-size: 11px;
+  color: #008cff;
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  color: #31546c;
+  font-size: 11px;
+  padding: 35px 15px;
+}
+
+@media (max-width: 600px) {
+  .tools {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="matrix">
+  <span>010101101001011010010110</span>
+  <span>101001011010010101101001</span>
+  <span>001101010110100101010110</span>
+  <span>110010101001011010100101</span>
+  <span>010110100101101001011010</span>
+  <span>101101001010110100101101</span>
+  <span>001010110100101101001010</span>
+  <span>110101001011010010110100</span>
+</div>
+
+<header>
+  <div class="logo">XROOTING PROJECT</div>
+  <div class="subtitle">OSINT • PUBLIC SOURCES • RESEARCH</div>
+</header>
+
+<main>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    SYSTEM ONLINE — DEMONSTRATION MODE
+  </div>
+
+  <h1>OSINT CONSOLE</h1>
+
+  <p class="description">
+    Sélectionnez un module et recherchez des informations provenant
+    de sources publiques autorisées.
+  </p>
+
+  <div class="tools">
+
+    <div class="tool active" onclick="choisir('pseudo', this)">
+      <div class="tool-title">👤 PSEUDO</div>
+      <div class="tool-text">Recherche de pseudonyme</div>
+    </div>
+
+    <div class="tool" onclick="choisir('domaine', this)">
+      <div class="tool-title">🌐 DOMAINE</div>
+      <div class="tool-text">Analyse d'un domaine</div>
+    </div>
+
+    <div class="tool" onclick="choisir('email', this)">
+      <div class="tool-title">✉ EMAIL</div>
+      <div class="tool-text">Recherche de démonstration</div>
+    </div>
+
+    <div class="tool" onclick="choisir('image', this)">
+      <div class="tool-title">🖼 IMAGE</div>
+      <div class="tool-text">Analyse non-identifiante</div>
+    </div>
+
+  </div>
+
+  <div class="search-box">
+
+    <label id="searchLabel">Pseudo</label>
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Exemple : xrooting"
+    >
+
+    <button onclick="rechercher()">
+      ▶ LANCER LA RECHERCHE
+    </button>
+
+  </div>
+
+  <div id="result"></div>
+
+  <div class="terminal">
+    <div>&gt; XROOTING OSINT CONSOLE</div>
+    <div>&gt; Initialisation...</div>
+    <div>&gt; Sources publiques uniquement</div>
+    <div>&gt; En attente d'une requête...</div>
+  </div>
+
+</main>
+
+<footer>
+  XROOTING PROJECT © 2026 — PUBLIC OSINT RESEARCH
+</footer>
+
 <script>
-  const fiches = [
-    {
-      nom: "DUPONT",
-      prenom: "GILBERT",
-      source: "Donnée fictive de démonstration"
+
+let moduleActuel = "pseudo";
+
+const demonstrations = {
+  pseudo: {
+    "xrooting": {
+      titre: "PSEUDO TROUVÉ",
+      lignes: [
+        ["Pseudo", "xrooting"],
+        ["Type", "Pseudonyme"],
+        ["Statut", "Résultat de démonstration"],
+        ["Source", "Donnée fictive"]
+      ]
     },
-    {
-      nom: "MARTIN",
-      prenom: "JEAN",
-      source: "Donnée fictive de démonstration"
+
+    "shadow": {
+      titre: "PSEUDO TROUVÉ",
+      lignes: [
+        ["Pseudo", "shadow"],
+        ["Type", "Pseudonyme"],
+        ["Statut", "Résultat de démonstration"],
+        ["Source", "Donnée fictive"]
+      ]
     },
-    {
-      nom: "DURAND",
-      prenom: "MARIE",
-      source: "Donnée fictive de démonstration"
+
+    "neo": {
+      titre: "PSEUDO TROUVÉ",
+      lignes: [
+        ["Pseudo", "neo"],
+        ["Type", "Pseudonyme"],
+        ["Statut", "Résultat de démonstration"],
+        ["Source", "Donnée fictive"]
+      ]
     }
-  ];
+  },
 
-  function rechercher() {
-    const nom = document.getElementById("nom").value.trim().toLowerCase();
-    const prenom = document.getElementById("prenom").value.trim().toLowerCase();
-    const resultat = document.getElementById("result");
+  domaine: {
+    "example.com": {
+      titre: "DOMAINE ANALYSÉ",
+      lignes: [
+        ["Domaine", "example.com"],
+        ["Type", "Domaine de démonstration"],
+        ["HTTPS", "Disponible"],
+        ["Source", "Donnée publique de démonstration"]
+      ]
+    }
+  },
 
-    const fiche = fiches.find(f =>
-      (nom === "" || f.nom.toLowerCase() === nom) &&
-      (prenom === "" || f.prenom.toLowerCase() === prenom)
-    );
+  email: {
+    "demo@example.com": {
+      titre: "EMAIL ANALYSÉ",
+      lignes: [
+        ["Email", "demo@example.com"],
+        ["Statut", "Démonstration"],
+        ["Résultat", "Aucune donnée personnelle"],
+        ["Source", "Donnée fictive"]
+      ]
+    }
+  },
 
-    if (fiche) {
-      resultat.innerHTML = `
-        <div class="result-title">Fiche trouvée</div>
-
-        <div class="line">
-          <div class="label">Nom</div>
-          <div class="value">${fiche.nom}</div>
-        </div>
-
-        <div class="line">
-          <div class="label">Prénom</div>
-          <div class="value">${fiche.prenom}</div>
-        </div>
-
-        <div class="line">
-          <div class="label">Source</div>
-          <div class="value">${fiche.source}</div>
-        </div>
-
-        <div class="notice">
-          Fiche de démonstration — aucune donnée personnelle réelle.
-        </div>
-      `;
-
-      resultat.style.display = "block";
-    } else {
-      resultat.innerHTML = `
-        <div class="result-title">Aucun résultat</div>
-        <div class="notice">
-          Aucune fiche correspondante dans la base de démonstration.
-        </div>
-      `;
-
-      resultat.style.display = "block";
+  image: {
+    "demo": {
+      titre: "IMAGE ANALYSÉE",
+      lignes: [
+        ["Analyse", "Image de démonstration"],
+        ["Visage", "Non identifié"],
+        ["Recherche", "Similarités visuelles uniquement"],
+        ["Résultat", "Aucune identité déterminée"]
+      ]
     }
   }
+};
+
+function choisir(type, element) {
+
+  moduleActuel = type;
+
+  document.querySelectorAll(".tool").forEach(tool => {
+    tool.classList.remove("active");
+  });
+
+  element.classList.add("active");
+
+  const label = document.getElementById("searchLabel");
+  const input = document.getElementById("searchInput");
+
+  if (type === "pseudo") {
+    label.textContent = "Pseudo";
+    input.placeholder = "Exemple : xrooting";
+  }
+
+  if (type === "domaine") {
+    label.textContent = "Domaine";
+    input.placeholder = "Exemple : example.com";
+  }
+
+  if (type === "email") {
+    label.textContent = "Adresse email";
+    input.placeholder = "Exemple : demo@example.com";
+  }
+
+  if (type === "image") {
+    label.textContent = "Référence image";
+    input.placeholder = "Exemple : demo";
+  }
+
+  document.getElementById("result").style.display = "none";
+}
+
+function rechercher() {
+
+  const valeur = document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  const resultat = document.getElementById("result");
+
+  if (valeur === "") {
+    resultat.innerHTML = `
+      <div class="result-title">REQUÊTE INVALIDE</div>
+      <div class="notice">
+        Entrez une valeur avant de lancer la recherche.
+      </div>
+    `;
+
+    resultat.style.display = "block";
+    return;
+  }
+
+  const fiche =
+    demonstrations[moduleActuel] &&
+    demonstrations[moduleActuel][valeur];
+
+  if (fiche) {
+
+    let html = `
+      <div class="result-title">${fiche.titre}</div>
+    `;
+
+    fiche.lignes.forEach(ligne => {
+      html += `
+        <div class="line">
+          <div class="label">${ligne[0]}</div>
+          <div class="value">${ligne[1]}</div>
+        </div>
+      `;
+    });
+
+    html += `
+      <div class="badge">PUBLIC / DEMO</div>
+
+      <div class="notice">
+        Résultat de démonstration. Le site ne détermine pas
+        l'identité d'une personne à partir de son visage et
+        n'utilise pas de base privée de données personnelles.
+      </div>
+    `;
+
+    resultat.innerHTML = html;
+
+  } else {
+
+    resultat.innerHTML = `
+      <div class="result-title">AUCUN RÉSULTAT</div>
+
+      <div class="line">
+        <div class="label">Requête</div>
+        <div class="value">${valeur}</div>
+      </div>
+
+      <div class="notice">
+        Aucun résultat dans la base de démonstration.
+        Pour obtenir de vrais résultats, il faudrait connecter
+        ce module à des sources publiques et autorisées.
+      </div>
+    `;
+  }
+
+  resultat.style.display = "block";
+}
+
 </script>
+
+</body>
+      </html>
