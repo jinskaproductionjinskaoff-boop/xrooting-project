@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xrooting Project</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 25px 15px;
+      text-align: center;
+      border-bottom: 1px solid #f5c400;
+    }
+
+    .logo {
+      color: #f5c400;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    main {
+      width: 92%;
+      max-width: 650px;
+      margin: 35px auto;
+    }
+
+    h1 {
+      color: #f5c400;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    label {
+      display: block;
+      color: #f5c400;
+      font-size: 13px;
+      margin: 14px 0 7px;
+    }
+
+    label:first-child {
+      margin-top: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #050505;
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #f5c400;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: 0;
+      border-radius: 8px;
+      background: #f5c400;
+      color: #000;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    #result {
+      display: none;
+      margin-top: 25px;
+      background: #111;
+      border: 1px solid #f5c400;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .result-title {
+      color: #f5c400;
+      font-size: 19px;
+      margin-bottom: 15px;
+    }
+
+    .line {
+      padding: 12px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .label {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .value {
+      margin-top: 5px;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 13px;
+      border-radius: 8px;
+      background: #191600;
+      color: #bbb;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+      padding: 35px 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">XROOTING PROJECT</div>
+  <div class="subtitle">OSINT • SOURCES PUBLIQUES</div>
+</header>
+
+<main>
+
+  <h1>Recherche</h1>
+
+  <p class="description">
+    Recherchez une fiche dans les sources publiques du projet.
+  </p>
+
+  <div class="search-box">
+
+    <label for="nom">Nom</label>
+    <input id="nom" type="text" placeholder="Exemple : Dupont">
+
+    <label for="prenom">Prénom</label>
+    <input id="prenom" type="text" placeholder="Exemple : Gilbert">
+
+    <label for="telephone">Numéro de téléphone</label>
+    <input id="telephone" type="tel" placeholder="Exemple : 0600000000">
+
+    <button onclick="rechercher()">RECHERCHER</button>
+
+  </div>
+
+  <div id="result">
+
+    <div class="result-title">Fiche trouvée</div>
+
+    <div class="line">
+      <div class="label">Nom</div>
+      <div class="value">DUPONT</div>
+    </div>
+
+    <div class="line">
+      <div class="label">Prénom</div>
+      <div class="value">GILBERT</div>
+    </div>
+
+    <div class="line">
+      <div class="label">Téléphone</div>
+      <div class="value">06 00 00 00 00</div>
+    </div>
+
+    <div class="line">
+      <div class="label">Source</div>
+      <div class="value">Donnée fictive de démonstration</div>
+    </div>
+
+    <div class="notice">
+      Cette fiche est fictive et sert uniquement à démontrer
+      le fonctionnement du site.
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  Xrooting Project © 2026
+</footer>
+
+<script>
+  function rechercher() {
+
+    const nom = document.getElementById("nom").value.trim();
+    const prenom = document.getElementById("prenom").value.trim();
+
+    const resultat = document.getElementById("result");
+
+    if (nom !== "" || prenom !== "") {
+      resultat.style.display = "block";
+    } else {
+      resultat.style.display = "none";
+      alert("Entre un nom ou un prénom.");
+    }
+  }
+</script>
+
+</body>
+  </html>
