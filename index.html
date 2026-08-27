@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XrootProject - API Snapchat Command</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Intelligence | DarkGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-dark text-white">
+    <!-- Header -->
+    <header class="bg-black py-4">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">OSINT Intelligence</h1>
+            <p class="lead">Analyse avancée avec DarkGPT</p>
+        </div>
+    </header>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <!-- User Form Section -->
+            <div class="col-lg-8">
+                <div class="card bg-dark border-light mb-4">
+                    <div class="card-header bg-black text-center">
+                        <h3>Informations Utilisateur</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="userForm" class="row g-3 needs-validation" novalidate>
+                            <!-- Nom -->
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Nom</label>
+                                <input type="text" class="form-control bg-dark border-light text-white" id="lastName" required>
+                                <div class="invalid-feedback">Veuillez entrer votre nom.</div>
+                            </div>
 
-body {
-    background: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+                            <!-- Prénom -->
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">Prénom</label>
+                                <input type="text" class="form-control bg-dark border-light text-white" id="firstName" required>
+                                <div class="invalid-feedback">Veuillez entrer votre prénom.</div>
+                            </div>
 
-/* Fond hacker */
+                            <!-- Adresse -->
+                            <div class="col-12">
+                                <label for="address" class="form-label">Adresse complète</label>
+                                <textarea class="form-control bg-dark border-light text-white" id="address" rows="2" required></textarea>
+                                <div class="invalid-feedback">Veuillez entrer votre adresse.</div>
+                            </div>
 
-#matrix {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: .12;
-    z-index: -1;
-}
+                            <!-- Numéro de téléphone -->
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Numéro de téléphone</label>
+                                <input type="tel" class="form-control bg-dark border-light text-white" id="phone" required>
+                                <div class="invalid-feedback">Format: +33612345678</div>
+                            </div>
 
-/* Menu */
-
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 230px;
-    height: 100vh;
-    background: rgba(5,5,5,.97);
-    border-right: 1px solid #292929;
-    padding: 30px 15px;
-    z-index: 10;
-}
-
-.logo {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo h1 {
-    font-size: 25px;
-    letter-spacing: 3px;
+                            <!-- Options -->
+                            <div class="col-md-6 d-flex align-items-end">
+                                <div class="form-check form-switch ms-auto">
+                                    <input class="form-check-input" type
