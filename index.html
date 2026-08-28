@@ -1,120 +1,294 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VulnVault — Cybersecurity Database</title>
 
-  <title>VulnVault — Cybersecurity Database</title>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
 
-    body {
-      font-family: "Courier New", monospace;
-      background: #dfffe5;
-      color: #123b20;
-      min-height: 100vh;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: #dfffe5;
+  color: #123b20;
+}
 
-    header {
-      background: #b8f5c5;
-      border-bottom: 2px solid #39a852;
-      padding: 18px 35px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  background: #b8f5c5;
+  border-bottom: 3px solid #35a853;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #168333;
-    }
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #168333;
+}
 
-    .status {
-      color: #168333;
-      font-size: 14px;
-    }
+.status {
+  color: #168333;
+  font-weight: bold;
+}
 
-    nav {
-      background: #caffd3;
-      padding: 14px 35px;
-      border-bottom: 1px solid #75d888;
-    }
+nav {
+  background: #caffd3;
+  padding: 15px 20px;
+  border-bottom: 1px solid #75d888;
+}
 
-    nav a {
-      color: #176b2b;
-      text-decoration: none;
-      margin-right: 30px;
-      font-weight: bold;
-    }
+nav a {
+  color: #176b2b;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
+}
 
-    nav a:hover {
-      color: #0b4d1c;
-      text-decoration: underline;
-    }
+main {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
 
-    main {
-      max-width: 1200px;
-      margin: 35px auto;
-      padding: 0 20px;
-    }
+.hero {
+  background: #effff2;
+  border: 2px solid #72d586;
+  border-radius: 12px;
+  padding: 30px;
+}
 
-    .hero {
-      background: #effff2;
-      border: 1px solid #72d586;
-      border-radius: 12px;
-      padding: 35px;
-      box-shadow: 0 5px 20px rgba(25, 120, 45, 0.12);
-    }
+h1 {
+  margin: 0 0 10px;
+  color: #14752d;
+  font-size: 38px;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      color: #14752d;
-      margin-bottom: 10px;
-    }
+.hero p {
+  color: #477452;
+}
 
-    .hero p {
-      color: #376b45;
-      margin-bottom: 25px;
-    }
+.search {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border: 2px solid #58c66e;
+  border-radius: 8px;
+  font-size: 16px;
+}
 
-    .search {
-      width: 100%;
-      padding: 16px;
-      border: 2px solid #58c66e;
-      border-radius: 8px;
-      background: white;
-      color: #123b20;
-      font-family: inherit;
-      font-size: 16px;
-      outline: none;
-    }
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: #35ad50;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .search:focus {
-      border-color: #168333;
-      box-shadow: 0 0 10px rgba(22, 131, 51, 0.2);
-    }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 25px;
-    }
+.card {
+  background: #effff2;
+  border: 1px solid #78d98b;
+  border-radius: 10px;
+  padding: 20px;
+}
 
-    .card {
-      background: #effff2;
-      border: 1px solid #78d98b;
-      border-radius: 10px;
-      padding: 25px;
-    }
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #477452;
+}
 
-    .card h3 {
-      color: #4b7655;
-      font-size: 13px;
-      margin
+.number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #159333;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.panel {
+  background: #effff2;
+  border: 1px solid #78d98b;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.panel h2 {
+  color: #14752d;
+}
+
+.vuln {
+  background: #dcffe3;
+  border-left: 4px solid #28a745;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.badge {
+  background: #b9f5c5;
+  color: #14752d;
+  padding: 4px 8px;
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 25px;
+  text-align: center;
+  background: #b8f5c5;
+  color: #477452;
+}
+
+@media (max-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">VULNVAULT</div>
+  <div class="status">● SYSTEM ONLINE</div>
+</header>
+
+<nav>
+  <a href="#">DATABASE</a>
+  <a href="#">CVE</a>
+  <a href="#">LABS</a>
+  <a href="#">RESEARCH</a>
+  <a href="#">ABOUT</a>
+</nav>
+
+<main>
+
+<section class="hero">
+  <h1>VulnVault</h1>
+  <p>Cybersecurity Research & Vulnerability Database</p>
+
+  <input
+    class="search"
+    type="text"
+    placeholder="Search CVE, vulnerability, product..."
+  >
+
+  <button onclick="searchDB()">SEARCH DATABASE</button>
+</section>
+
+<section class="stats">
+
+  <div class="card">
+    <h3>VULNERABILITIES</h3>
+    <div class="number">231,884</div>
+  </div>
+
+  <div class="card">
+    <h3>SECURITY LABS</h3>
+    <div class="number">1,042</div>
+  </div>
+
+  <div class="card">
+    <h3>RESEARCHERS</h3>
+    <div class="number">8,921</div>
+  </div>
+
+  <div class="card">
+    <h3>REPORTS</h3>
+    <div class="number">48,213</div>
+  </div>
+
+</section>
+
+<section class="content">
+
+<div class="panel">
+  <h2>▣ Recent Vulnerabilities</h2>
+
+  <div class="vuln">
+    <strong>CVE-2026-1042</strong>
+    <span class="badge">HIGH</span>
+    <p>Web application security issue</p>
+  </div>
+
+  <div class="vuln">
+    <strong>CVE-2026-0871</strong>
+    <span class="badge">MEDIUM</span>
+    <p>Authentication configuration issue</p>
+  </div>
+
+  <div class="vuln">
+    <strong>CVE-2026-0633</strong>
+    <span class="badge">CRITICAL</span>
+    <p>Security research entry</p>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>▣ Categories</h2>
+  <p>▸ Web Security</p>
+  <p>▸ API Security</p>
+  <p>▸ Authentication</p>
+  <p>▸ Cryptography</p>
+  <p>▸ Network Security</p>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+VULNVAULT // CYBERSECURITY DATABASE
+<br>
+Educational & Defensive Research
+</footer>
+
+<script>
+function searchDB() {
+  const value = document.querySelector(".search").value;
+
+  if (!value.trim()) {
+    alert("Entre une recherche.");
+  } else {
+    alert("Recherche : " + value);
+  }
+}
+</script>
+
+</body>
+                               </html>
