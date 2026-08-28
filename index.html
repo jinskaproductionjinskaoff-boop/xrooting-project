@@ -1,53 +1,120 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Snapchat</title>
-    <style>
-        /* Reset et variables */
-        :root {
-            --primary-yellow: #FFFC00;
-            --primary-blue: #0075E6;
-            --text-dark: #222;
-            --text-light: #8E8E93;
-            --border-color: #E0E0E0;
-            --shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            height: 100vh;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Logo animé (effet "ghost" original) */
-        .logo-container {
-            text-align: center;
-            padding: 40px 20px;
-            animation: pulse 2s infinite;
-        }
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-yellow);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            position: relative;
-        }
-        .logo::before {
-            content: "👻";
-            font-size: 32px;
-            color: var(--text-dark);
-        }
-        .logo::after {
-            content: "";
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,2
+  <title>VulnVault — Cybersecurity Database</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Courier New", monospace;
+      background: #dfffe5;
+      color: #123b20;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #b8f5c5;
+      border-bottom: 2px solid #39a852;
+      padding: 18px 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #168333;
+    }
+
+    .status {
+      color: #168333;
+      font-size: 14px;
+    }
+
+    nav {
+      background: #caffd3;
+      padding: 14px 35px;
+      border-bottom: 1px solid #75d888;
+    }
+
+    nav a {
+      color: #176b2b;
+      text-decoration: none;
+      margin-right: 30px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #0b4d1c;
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: #effff2;
+      border: 1px solid #72d586;
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 5px 20px rgba(25, 120, 45, 0.12);
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      color: #14752d;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #376b45;
+      margin-bottom: 25px;
+    }
+
+    .search {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #58c66e;
+      border-radius: 8px;
+      background: white;
+      color: #123b20;
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #168333;
+      box-shadow: 0 0 10px rgba(22, 131, 51, 0.2);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: #effff2;
+      border: 1px solid #78d98b;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .card h3 {
+      color: #4b7655;
+      font-size: 13px;
+      margin
