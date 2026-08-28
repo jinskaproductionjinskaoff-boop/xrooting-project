@@ -1,97 +1,238 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnVault</title>
 
-<title>VulnVault — Cybersecurity Database</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071a2e;
+            color: white;
+        }
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+        header {
+            background: #0b2945;
+            padding: 20px;
+            border-bottom: 2px solid #168cff;
+        }
+
+        .logo {
+            color: #42aaff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #091f35;
+            padding: 15px;
+        }
+
+        nav a {
+            color: #9dccff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .hero {
+            background: #0c2945;
+            border: 1px solid #1767a5;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #42aaff;
+            font-size: 42px;
+        }
+
+        input {
+            width: 70%;
+            padding: 15px;
+            background: #061321;
+            border: 1px solid #168cff;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 15px 20px;
+            background: #168cff;
+            color: white;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #0c2945;
+            border: 1px solid #174d78;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .number {
+            color: #42aaff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .section {
+            background: #0c2945;
+            border: 1px solid #174d78;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .item {
+            background: #071a2e;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #168cff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background: #091f35;
+            color: #7193b5;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            input {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">VULNVAULT</div>
+</header>
+
+<nav>
+    <a href="#">Database</a>
+    <a href="#">CVE</a>
+    <a href="#">Windows</a>
+    <a href="#">Linux</a>
+    <a href="#">Web</a>
+    <a href="#">Labs</a>
+    <a href="#">Statistics</a>
+</nav>
+
+<main>
+
+    <div class="hero">
+        <h1>VulnVault</h1>
+
+        <p>
+            Cybersecurity Vulnerability Database
+        </p>
+
+        <input id="search" placeholder="Search CVE or vulnerability">
+
+        <button onclick="search()">SEARCH</button>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <p>Vulnerabilities</p>
+            <div class="number">231K</div>
+        </div>
+
+        <div class="card">
+            <p>CVEs</p>
+            <div class="number">198K</div>
+        </div>
+
+        <div class="card">
+            <p>Research</p>
+            <div class="number">4.8K</div>
+        </div>
+
+        <div class="card">
+            <p>Labs</p>
+            <div class="number">1K</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Recent Vulnerabilities</h2>
+
+        <div class="item">
+            <b>CVE-2026-1042</b>
+            <p>Web security vulnerability</p>
+        </div>
+
+        <div class="item">
+            <b>CVE-2026-0871</b>
+            <p>Authentication vulnerability</p>
+        </div>
+
+        <div class="item">
+            <b>CVE-2026-0633</b>
+            <p>Network security issue</p>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Platforms</h2>
+
+        <p>🪟 Windows</p>
+        <p>🐧 Linux</p>
+        <p>🤖 Android</p>
+        <p>🌐 Web Applications</p>
+        <p>☁️ Cloud</p>
+
+    </div>
+
+</main>
+
+<footer>
+    VULNVAULT<br>
+    Cybersecurity Research Database
+</footer>
+
+<script>
+function search() {
+    let value = document.getElementById("search").value;
+
+    if (value == "") {
+        alert("Enter a search.");
+    } else {
+        alert("Searching for: " + value);
+    }
 }
+</script>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #07111f;
-    color: #d9e8ff;
-}
-
-/* HEADER */
-
-header {
-    background: #0b1b31;
-    border-bottom: 1px solid #1c4d80;
-    padding: 18px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: #4da3ff;
-    letter-spacing: 1px;
-}
-
-.logo span {
-    color: #8bc7ff;
-}
-
-.status {
-    color: #4ee18a;
-    font-size: 13px;
-}
-
-/* NAVIGATION */
-
-nav {
-    background: #09182b;
-    border-bottom: 1px solid #183c63;
-    padding: 13px 25px;
-    display: flex;
-    gap: 22px;
-    overflow-x: auto;
-}
-
-nav a {
-    color: #8eadd0;
-    text-decoration: none;
-    white-space: nowrap;
-    font-size: 14px;
-}
-
-nav a:hover {
-    color: #4da3ff;
-}
-
-/* MAIN */
-
-main {
-    max-width: 1250px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-/* HERO */
-
-.hero {
-    background: linear-gradient(135deg, #0b2038, #0a1728);
-    border: 1px solid #1c548c;
-    border-radius: 10px;
-    padding: 35px;
-    box-shadow: 0 0 30px rgba(0, 115, 255, 0.08);
-}
-
-.hero h1 {
-    font-size: 42px;
-    color: #5eb0ff;
-    margin-bottom: 8px;
-}
-
-.hero p {
-    color: #829dbc;
-    margin-bottom: 25
+</body>
+            </html>
